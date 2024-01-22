@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <title>Income Tax Calculator</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="bootstrap-4.0.0-dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+
+<body>
+        <div class="container">
+                <h2 style="text-align: center;">INCOME TAX CALCULATOR</h2><br>
+                <form class="form-horizontal">
+                        <div class="form-group">
+                                <label class="control-label col-sm-5">Assessment Year</label>
+                                <div class="box">
+                                        <select name="Assesment Year" id="AssesYear">
+                                                <option>2021-2022</option>
+                                                <option>2020-2021</option>
+                                                <option>2019-2020</option>
+                                        </select>
+                                </div>
+                        </div>
+
+
+                        <div class="form-group">
+                                <label class="control-label col-sm-5">Tax Payer</label>
+                                <div class="box">
+                                        <select name="taxpayer" id="AssesType">
+                                                <option>Individual</option>
+                                                <option>HUF</option>
+                                                <option>AOP's/BOI</option>
+                                                <option>Domestic Company</option>
+                                                <option>Foreign Company</option>
+                                                <option>Firms</option>
+                                                <option>LLP</option>
+                                                <option>Co-operative Society</option>
+                                        </select>
+                                </div>
+
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5">Gender</label>
+                                <div class="box">
+                                        <select name="Gender" id="Gender">
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                                <option value="scitizen">Senior Citizen</option>
+                                                <option value="sscitizen">Super Senior Citizen</option>
+                                        </select>
+                                </div>
+
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5">Residential Status</label>
+                                <div class="box">
+                                        <select name="Residentstatus" id="Rstatus">
+                                                <option value="resident">Resident</option>
+                                                <option value="nonresident">Non-Resident</option>
+                                                <option value="notordinaryresident">Not Ordinary Resident</option>
+                                        </select>
+                                </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5">Income from Salary</label>
+                                <a href="#" data-toggle="tooltip" data-placement="right"
+                                        title="A rebate under section 87A is one of the income tax provisions that help taxpayers reduce their income tax liability. You can claim an income tax rebate under section 87A if your total income does not exceed Rs 5 lakh in a financial year. Your income tax liability becomes nil after claiming the rebate under section 87A."><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="20" height="15"
+                                                fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                                <path
+                                                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                <path
+                                                        d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                        </svg></a>
+                                <div class="col-xs-4">
+                                        <input type="text" class="form-control" size="50%" id="totalval" />
+
+                                </div>
+
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5" for="ifhp">Income from house property</label>
+                                <div class="col-xs-4">
+                                        <input type="text" class="form-control" id="opproperty" size="50%" value="0"
+                                                onclick="calcTaxes()">
+                                </div>
+                                <button class="accordion" type="button" onclick="myFunction('myDIV1')" id="myDIV1">Show
+                                        Details</button>
+                                <div class="panel">
+
+                                        <p>a. Income from Let-out Property</p>
+                                        <p>1. Annual Letable Value/Rent Received or Receivable<input type="text"
+                                                        size="15" id="alvrrreceiv" value="0"
+                                                        onchange="ifloproperty()" /></p>
+                                        <p>2. Less: Municipal Taxes Paid During the Year<input type="text" size="15"
+                                                        id="lmtpdtyear" value="0" onchange="ifloproperty()" /> </p>
+                                        <p>3. Less:Unrealized Rent<input type="text" size="15" id="lurent" value="0"
+                                                        onchange="ifloproperty()" /></p>
+                                        <p>4. Net Annual Value (1-(2+3))<input type="text" size="15" id="navalue"
+                                                        value="0" onchange="ifloproperty()" /></p>
+                                        <p>b. Income from Self-occupied Property</p>
+                                        <p>Interest Paid/Payable on Housing Loan</p>
+                                        <p>1. Interest on Housing Loan<input type="text" size="15" id="iohloan"
+                                                        value="0" onchange="ifhprop()" /></p>
+                                        <p>Less: Deductions from Net Annual Value</p>
+                                        <p>i. Standard Deduction @ 30% of Net Annual Value<input type="text" size="15"
+                                                        id="sdnavalue" value="0" onchange="ifhproperty()" /></p>
+                                        <p>ii. Interest on Housing Loan<input type="text" size="15" id="ionhloan"
+                                                        value="0" onchange="ifhproperty()" /></p>
+                                        <p>Income from Let-out House Property<input type="text" size="15"
+                                                        id="iflohproperty" value="0" onchange="ifhproperty()" /></p>
+
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5" for="gs">Capital Gains</label>
+                                <div class="col-xs-4">
+                                        <input type="text" class="form-control" id="cgstotal" size="50%" value="0"
+                                                disabled>
+                                </div>
+                                <button class="accordion" type="button" onclick="myFunction('myDIV2')" id="myDIV2">Show
+                                        Details</button>
+                                <div class="panel">
+                                        <div class="container">
+                                                <table class="table">
+                                                        <thead>
+                                                                <th colspan="5">Short Term Capital Gains (Other than
+                                                                        covered under section <h data-toggle="modal"
+                                                                                class="pointer" data-target="#myModal"
+                                                                                style="color:blue;"><b>111A</b></h>)
+                                                                </th>
+                                                                <div class="modal fade" id="myModal" role="dialog">
+                                                                        <div class="modal-dialog">
+                                                                                <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                                <button type="button"
+                                                                                                        class="close"
+                                                                                                        data-dismiss="modal">&times;</button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                                <p>
+                                                                                                <h2>Section - 111A,
+                                                                                                        Income-tax Act,
+                                                                                                        1961-2021</h2>
+                                                                                                <h4>on short-term
+                                                                                                        capital gains in
+                                                                                                        certain cases.
+                                                                                                </h4>
+
+                                                                                                <P>111A. (1) Where the
+                                                                                                        total income of
+                                                                                                        an assessee
+                                                                                                        includes any
+                                                                                                        income
+                                                                                                        chargeable under
+                                                                                                        the head
+                                                                                                        "Capital gains",
+                                                                                                        arising from the
+                                                                                                        transfer of a
+                                                                                                        short-term
+                                                                                                        capital asset,
+                                                                                                        being an equity
+                                                                                                        share in a
+                                                                                                        company or a
+                                                                                                        unit of an
+                                                                                                        equity oriented
+                                                                                                        fund or a unit
+                                                                                                        of a business
+                                                                                                        trust and—</P>
+
+                                                                                                <P>(a) the transaction
+                                                                                                        of sale of such
+                                                                                                        equity share or
+                                                                                                        unit is entered
+                                                                                                        into on or after
+                                                                                                        the date on
+                                                                                                        which Chapter
+                                                                                                        VII of the
+                                                                                                        Finance (No. 2)
+                                                                                                        Act, 2004 comes
+                                                                                                        into force; and
+                                                                                                </P>
+
+                                                                                                <P>(b) such transaction
+                                                                                                        is chargeable to
+                                                                                                        securities
+                                                                                                        transaction tax
+                                                                                                        under that
+                                                                                                        Chapter,</P>
+
+                                                                                                <P>the tax payable by
+                                                                                                        the assessee on
+                                                                                                        the total income
+                                                                                                        shall be the
+                                                                                                        aggregate of—
+                                                                                                </P>
+
+                                                                                                <P>(i) the amount of
+                                                                                                        income-tax
+                                                                                                        calculated on
+                                                                                                        such short-term
+                                                                                                        capital gains at
+                                                                                                        the rate of
+                                                                                                        fifteen per
+                                                                                                        cent; and</P>
+
+                                                                                                <P>(ii) the amount of
+                                                                                                        income-tax
+                                                                                                        payable on the
+                                                                                                        balance amount
+                                                                                                        of the total
+                                                                                                        income as if
+                                                                                                        such balance
+                                                                                                        amount were the
+                                                                                                        total income of
+                                                                                                        the assessee:
+                                                                                                </P>
+
+                                                                                                <P>Provided that in the
+                                                                                                        case of an
+                                                                                                        individual or a
+                                                                                                        Hindu undivided
+                                                                                                        family, being a
+                                                                                                        resident, where
+                                                                                                        the total income
+                                                                                                        as reduced by
+                                                                                                        such short-term
+                                                                                                        capital gains is
+                                                                                                        below the
+                                                                                                        maximum amount
+                                                                                                        which is not
+                                                                                                        chargeable to
+                                                                                                        income-tax,
+                                                                                                        then, such
+                                                                                                        short-term
+                                                                                                        capital gains
+                                                                                                        shall be reduced
+                                                                                                        by the amount by
+                                                                                                        which the total
+                                                                                                        income as so
+                                                                                                        reduced falls
+                                                                                                        short of the
+                                                                                                        maximum amount
+                                                                                                        which is not
+                                                                                                        chargeable to
+                                                                                                        income-tax and
+                                                                                                        the tax on the
+                                                                                                        balance of such
+                                                                                                        short-term
+                                                                                                        capital gains
+                                                                                                        shall be
+                                                                                                        computed at the
+                                                                                                        rate of fifteen
+                                                                                                        per cent :</P>
+
+                                                                                                <P>Provided further that
+                                                                                                        nothing
+                                                                                                        contained in
+                                                                                                        clause (b) shall
+                                                                                                        apply to a
+                                                                                                        transaction
+                                                                                                        undertaken on a
+                                                                                                        recognised stock
+                                                                                                        exchange located
+                                                                                                        in any
+                                                                                                        International
+                                                                                                        Financial
+                                                                                                        Services Centre
+                                                                                                        and where the
+                                                                                                        consideration
+                                                                                                        for such
+                                                                                                        transaction is
+                                                                                                        paid or payable
+                                                                                                        in foreign
+                                                                                                        currency.</P>
+
+                                                                                                <P>(2) Where the gross
+                                                                                                        total income of
+                                                                                                        an assessee
+                                                                                                        includes any
+                                                                                                        short-term
+                                                                                                        capital gains
+                                                                                                        referred to in
+                                                                                                        sub-section (1),
+                                                                                                        the deduction
+                                                                                                        under Chapter
+                                                                                                        VI-A shall be
+                                                                                                        allowed from the
+                                                                                                        gross total
+                                                                                                        income as
+                                                                                                        reduced by such
+                                                                                                        capital gains.
+                                                                                                </P>
+
+                                                                                                <P>(3) Where the total
+                                                                                                        income of an
+                                                                                                        assessee
+                                                                                                        includes any
+                                                                                                        short-term
+                                                                                                        capital gains
+                                                                                                        referred to in
+                                                                                                        sub-section (1),
+                                                                                                        the rebate under
+                                                                                                        section 88 shall
+                                                                                                        be allowed from
+                                                                                                        the income-tax
+                                                                                                        on the total
+                                                                                                        income as
+                                                                                                        reduced by such
+                                                                                                        capital gains.
+                                                                                                </P>
+
+                                                                                                <P>Explanation.—For the
+                                                                                                        purposes of this
+                                                                                                        section,—</P>
+
+                                                                                                <P>(a) "equity oriented
+                                                                                                        fund" shall have
+                                                                                                        the meaning
+                                                                                                        assigned to it
+                                                                                                        in 33[clause (a)
+                                                                                                        of the
+                                                                                                        Explanation to
+                                                                                                        section 112A];
+                                                                                                </P>
+
+                                                                                                <P>(b) "International
+                                                                                                        Financial
+                                                                                                        Services Centre"
+                                                                                                        shall have the
+                                                                                                        same meaning as
+                                                                                                        assigned to it
+                                                                                                        in clause (q) of
+                                                                                                        section 2 of the
+                                                                                                        Special Economic
+                                                                                                        Zones Act, 2005
+                                                                                                        (28 of 2005);
+                                                                                                </P>
+
+                                                                                                <P>(c) "recognised stock
+                                                                                                        exchange" shall
+                                                                                                        have the meaning
+                                                                                                        assigned to it
+                                                                                                        in clause (ii)
+                                                                                                        of the
+                                                                                                        Explanation 1 to
+                                                                                                        sub-section* (5)
+                                                                                                        of section 43.
+                                                                                                </p>
+                                                                                                </P>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+
+                                                                <tr>
+                                                                        <td scope="col">From 01/04/2016 to 15/06/2016
+                                                                        </td>
+                                                                        <td scope="col">From 16/06/2014 to 15/09/2014
+                                                                        </td>
+                                                                        <td scope="col">From 16/09/2014 to 15/12/2014
+                                                                        </td>
+                                                                        <td scope="col">From 16/12/2014 to 15/03/2015
+                                                                        </td>
+                                                                        <td scope="col">From 16/03/2015 to 31/03/2015ss
+                                                                        </td>
+                                                                        <td scope="col">Total</td>
+
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                <tr>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="cgsone"
+                                                                                        onchange="cgs416()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="cgstwo"
+                                                                                        onchange="cgs416()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="cgsthree"
+                                                                                        onchange="cgs416()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="cgsfour"
+                                                                                        onchange="cgs416()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="cgsfive"
+                                                                                        onchange="cgs416()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        disabled id="cgsonetotal"
+                                                                                        onchange="cgs416()" />
+                                                                        </td>
+
+                                                                </tr>
+                                                        </tbody>
+                                                        <thead>
+                                                                <th colspan="5">Short Term Capital Gains (Covered under
+                                                                        section <h data-toggle="modal" class="pointer"
+                                                                                data-target="#myModal"
+                                                                                style="color:blue;"><b>111A</b></h>)
+                                                                </th>
+                                                                <div class="modal fade" id="myModal" role="dialog">
+                                                                        <div class="modal-dialog">
+                                                                                <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                                <button type="button"
+                                                                                                        class="close"
+                                                                                                        data-dismiss="modal">&times;</button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                                <p>
+                                                                                                <h2>Section - 111A,
+                                                                                                        Income-tax Act,
+                                                                                                        1961-2021</h2>
+                                                                                                <h4>on short-term
+                                                                                                        capital gains in
+                                                                                                        certain cases.
+                                                                                                </h4>
+
+                                                                                                <P>111A. (1) Where the
+                                                                                                        total income of
+                                                                                                        an assessee
+                                                                                                        includes any
+                                                                                                        income
+                                                                                                        chargeable under
+                                                                                                        the head
+                                                                                                        "Capital gains",
+                                                                                                        arising from the
+                                                                                                        transfer of a
+                                                                                                        short-term
+                                                                                                        capital asset,
+                                                                                                        being an equity
+                                                                                                        share in a
+                                                                                                        company or a
+                                                                                                        unit of an
+                                                                                                        equity oriented
+                                                                                                        fund or a unit
+                                                                                                        of a business
+                                                                                                        trust and—</P>
+
+                                                                                                <P>(a) the transaction
+                                                                                                        of sale of such
+                                                                                                        equity share or
+                                                                                                        unit is entered
+                                                                                                        into on or after
+                                                                                                        the date on
+                                                                                                        which Chapter
+                                                                                                        VII of the
+                                                                                                        Finance (No. 2)
+                                                                                                        Act, 2004 comes
+                                                                                                        into force; and
+                                                                                                </P>
+
+                                                                                                <P>(b) such transaction
+                                                                                                        is chargeable to
+                                                                                                        securities
+                                                                                                        transaction tax
+                                                                                                        under that
+                                                                                                        Chapter,</P>
+
+                                                                                                <P>the tax payable by
+                                                                                                        the assessee on
+                                                                                                        the total income
+                                                                                                        shall be the
+                                                                                                        aggregate of—
+                                                                                                </P>
+
+                                                                                                <P>(i) the amount of
+                                                                                                        income-tax
+                                                                                                        calculated on
+                                                                                                        such short-term
+                                                                                                        capital gains at
+                                                                                                        the rate of
+                                                                                                        fifteen per
+                                                                                                        cent; and</P>
+
+                                                                                                <P>(ii) the amount of
+                                                                                                        income-tax
+                                                                                                        payable on the
+                                                                                                        balance amount
+                                                                                                        of the total
+                                                                                                        income as if
+                                                                                                        such balance
+                                                                                                        amount were the
+                                                                                                        total income of
+                                                                                                        the assessee:
+                                                                                                </P>
+
+                                                                                                <P>Provided that in the
+                                                                                                        case of an
+                                                                                                        individual or a
+                                                                                                        Hindu undivided
+                                                                                                        family, being a
+                                                                                                        resident, where
+                                                                                                        the total income
+                                                                                                        as reduced by
+                                                                                                        such short-term
+                                                                                                        capital gains is
+                                                                                                        below the
+                                                                                                        maximum amount
+                                                                                                        which is not
+                                                                                                        chargeable to
+                                                                                                        income-tax,
+                                                                                                        then, such
+                                                                                                        short-term
+                                                                                                        capital gains
+                                                                                                        shall be reduced
+                                                                                                        by the amount by
+                                                                                                        which the total
+                                                                                                        income as so
+                                                                                                        reduced falls
+                                                                                                        short of the
+                                                                                                        maximum amount
+                                                                                                        which is not
+                                                                                                        chargeable to
+                                                                                                        income-tax and
+                                                                                                        the tax on the
+                                                                                                        balance of such
+                                                                                                        short-term
+                                                                                                        capital gains
+                                                                                                        shall be
+                                                                                                        computed at the
+                                                                                                        rate of fifteen
+                                                                                                        per cent :</P>
+
+                                                                                                <P>Provided further that
+                                                                                                        nothing
+                                                                                                        contained in
+                                                                                                        clause (b) shall
+                                                                                                        apply to a
+                                                                                                        transaction
+                                                                                                        undertaken on a
+                                                                                                        recognised stock
+                                                                                                        exchange located
+                                                                                                        in any
+                                                                                                        International
+                                                                                                        Financial
+                                                                                                        Services Centre
+                                                                                                        and where the
+                                                                                                        consideration
+                                                                                                        for such
+                                                                                                        transaction is
+                                                                                                        paid or payable
+                                                                                                        in foreign
+                                                                                                        currency.</P>
+
+                                                                                                <P>(2) Where the gross
+                                                                                                        total income of
+                                                                                                        an assessee
+                                                                                                        includes any
+                                                                                                        short-term
+                                                                                                        capital gains
+                                                                                                        referred to in
+                                                                                                        sub-section (1),
+                                                                                                        the deduction
+                                                                                                        under Chapter
+                                                                                                        VI-A shall be
+                                                                                                        allowed from the
+                                                                                                        gross total
+                                                                                                        income as
+                                                                                                        reduced by such
+                                                                                                        capital gains.
+                                                                                                </P>
+
+                                                                                                <P>(3) Where the total
+                                                                                                        income of an
+                                                                                                        assessee
+                                                                                                        includes any
+                                                                                                        short-term
+                                                                                                        capital gains
+                                                                                                        referred to in
+                                                                                                        sub-section (1),
+                                                                                                        the rebate under
+                                                                                                        section 88 shall
+                                                                                                        be allowed from
+                                                                                                        the income-tax
+                                                                                                        on the total
+                                                                                                        income as
+                                                                                                        reduced by such
+                                                                                                        capital gains.
+                                                                                                </P>
+
+                                                                                                <P>Explanation.—For the
+                                                                                                        purposes of this
+                                                                                                        section,—</P>
+
+                                                                                                <P>(a) "equity oriented
+                                                                                                        fund" shall have
+                                                                                                        the meaning
+                                                                                                        assigned to it
+                                                                                                        in 33[clause (a)
+                                                                                                        of the
+                                                                                                        Explanation to
+                                                                                                        section 112A];
+                                                                                                </P>
+
+                                                                                                <P>(b) "International
+                                                                                                        Financial
+                                                                                                        Services Centre"
+                                                                                                        shall have the
+                                                                                                        same meaning as
+                                                                                                        assigned to it
+                                                                                                        in clause (q) of
+                                                                                                        section 2 of the
+                                                                                                        Special Economic
+                                                                                                        Zones Act, 2005
+                                                                                                        (28 of 2005);
+                                                                                                </P>
+
+                                                                                                <P>(c) "recognised stock
+                                                                                                        exchange" shall
+                                                                                                        have the meaning
+                                                                                                        assigned to it
+                                                                                                        in clause (ii)
+                                                                                                        of the
+                                                                                                        Explanation 1 to
+                                                                                                        sub-section* (5)
+                                                                                                        of section 43.
+                                                                                                </p>
+                                                                                                </P>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                                <tr>
+                                                                        <td scope="col">From 01/04/2014 to 15/06/2014
+                                                                        </td>
+                                                                        <td scope="col">From 16/06/2014 to 15/09/2014
+                                                                        </td>
+                                                                        <td scope="col">From 16/09/2014 to 15/12/2014
+                                                                        </td>
+                                                                        <td scope="col">From 16/12/2014 to 15/03/2015
+                                                                        </td>
+                                                                        <td scope="col">From 16/03/2015 to<br>
+                                                                                31/03/2015</td>
+                                                                        <td scope="col">Total</td>
+
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                <tr>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="cgstwoone"
+                                                                                        onchange="cgs414()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="cgstwotwo"
+                                                                                        onchange="cgs414()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="cgstwothree"
+                                                                                        onchange="cgs414()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="cgstwofour"
+                                                                                        onchange="cgs414()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="cgstwofive"
+                                                                                        onchange="cgs414()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        disabled id="cgstwototal"
+                                                                                        onchange="cgs414()" />
+                                                                        </td>
+
+                                                                </tr>
+                                                        </tbody>
+                                                        <thead>
+                                                                <th colspan="5">Long Term Capital Gains (Charged to tax
+                                                                        @ 20%)</th>
+
+                                                                <tr>
+                                                                        <td scope="col">From 01/04/2014 to 15/06/2014
+                                                                        </td>
+                                                                        <td scope="col">From 16/06/2014 to 15/09/2014
+                                                                        </td>
+                                                                        <td scope="col">From 16/09/2014 to 15/12/2014
+                                                                        </td>
+                                                                        <td scope="col">From 16/12/2014 to 15/03/2015
+                                                                        </td>
+                                                                        <td scope="col">From 16/03/2015 to<br>
+                                                                                31/03/2015</td>
+                                                                        <td scope="col">Total</td>
+
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                <tr>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="ltcgone"
+                                                                                        onchange="ltgcgs()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="ltcgtwo"
+                                                                                        onchange="ltgcgs()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="ltcgthree"
+                                                                                        onchange="ltgcgs()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="ltcgfour"
+                                                                                        onchange="ltgcgs()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="ltcgfive"
+                                                                                        onchange="ltgcgs()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        disabled id="ltcgtot"
+                                                                                        onchange="ltgcgs()" /></td>
+
+                                                                </tr>
+                                                        </tbody>
+                                                        <thead>
+                                                                <th colspan="5">Long Term Capital Gains (Charged to tax
+                                                                        @ 10%)</th>
+                                                                <tr>
+                                                                        <td scope="col">From 01/04/2014 to 15/06/2014
+                                                                        </td>
+                                                                        <td scope="col">From 16/06/2014 to 15/09/2014
+                                                                        </td>
+                                                                        <td scope="col">From 16/09/2014 to 15/12/2014
+                                                                        </td>
+                                                                        <td scope="col">From 16/12/2014 to 15/03/2015
+                                                                        </td>
+                                                                        <td scope="col">From 16/03/2015 to<br>
+                                                                                31/03/2015 </td>
+                                                                        <td scope="col">Total</td>
+
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                <tr>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="ltgainsone"
+                                                                                        onchange="ltgains()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="ltgainstwo"
+                                                                                        onchange="ltgains()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="ltgainsthree"
+                                                                                        onchange="ltgains()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="ltgainsfour"
+                                                                                        onchange="ltgains()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="ltgainsfive"
+                                                                                        onchange="ltgains()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        disabled id="ltgainstotal"
+                                                                                        onchange="ltgains()" /></td>
+
+                                                                </tr>
+                                                        </tbody>
+                                                        <thead>
+                                                                <th colspan="5">Long Term Capital Gains (Covered under
+                                                                        section <h data-toggle="modal" class="pointer"
+                                                                                data-target="#myModal"
+                                                                                style="color:blue;"><b>112A</b></h>)
+                                                                </th>
+
+                                                                <div class="modal fade" id="myModal" role="dialog">
+                                                                        <div class="modal-dialog modal-lg">
+                                                                                <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                                <button type="button"
+                                                                                                        class="close"
+                                                                                                        data-dismiss="modal">&times;</button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                                <p>
+                                                                                                <h2>Section - 112A,
+                                                                                                        Income-tax Act,
+                                                                                                        1961-2019 (No.
+                                                                                                        2)</h2>
+                                                                                                <h4>Tax on long-term
+                                                                                                        capital gains in
+                                                                                                        certain cases.
+                                                                                                </h4>
+                                                                                                <P>
+                                                                                                        112A. (1)
+                                                                                                        Notwithstanding
+                                                                                                        anything
+                                                                                                        contained in
+                                                                                                        section 112, the
+                                                                                                        tax payable by
+                                                                                                        an assessee on
+                                                                                                        his total income
+                                                                                                        shall be
+                                                                                                        determined in
+                                                                                                        accordance with
+                                                                                                        the
+                                                                                                        provisions of
+                                                                                                        sub-section (2),
+                                                                                                        if—</P>
+                                                                                                <P>(i) the total income
+                                                                                                        includes any
+                                                                                                        income
+                                                                                                        chargeable under
+                                                                                                        the head
+                                                                                                        "Capital gains";
+                                                                                                </P>
+
+                                                                                                <p>(ii) the capital
+                                                                                                        gains arise from
+                                                                                                        the transfer of
+                                                                                                        a long-term
+                                                                                                        capital asset
+                                                                                                        being an
+                                                                                                        equity share in
+                                                                                                        a company or a
+                                                                                                        unit of an
+                                                                                                        equity oriented
+                                                                                                        fund or a unit
+                                                                                                        of a
+                                                                                                        business trust;
+                                                                                                </p>
+
+                                                                                                <P>(iii) securities
+                                                                                                        transaction tax
+                                                                                                        under Chapter
+                                                                                                        VII of the
+                                                                                                        Finance (No. 2)
+                                                                                                        Act, 2004
+                                                                                                        (23 of 2004)
+                                                                                                        has,—</p>
+
+                                                                                                <P>(a) in a case where
+                                                                                                        the long-term
+                                                                                                        capital asset is
+                                                                                                        in the nature of
+                                                                                                        an equity share
+                                                                                                        in a company,
+                                                                                                        been paid on
+                                                                                                        acquisition and
+                                                                                                        transfer of such
+                                                                                                        capital asset;
+                                                                                                        or
+                                                                                                </p>
+
+                                                                                                <P>(b) in a case where
+                                                                                                        the long-term
+                                                                                                        capital asset is
+                                                                                                        in the nature of
+                                                                                                        a unit of an
+                                                                                                        equity oriented
+                                                                                                        fund or a unit
+                                                                                                        of a business
+                                                                                                        trust, been paid
+                                                                                                        on transfer of
+                                                                                                        such capital
+                                                                                                        asset.</p>
+
+                                                                                                <P>(2) The tax payable
+                                                                                                        by the assessee
+                                                                                                        on the total
+                                                                                                        income referred
+                                                                                                        to in
+                                                                                                        sub-section
+                                                                                                        (1) shall be the
+                                                                                                        aggregate of—
+                                                                                                </p>
+
+                                                                                                <P>(i) the amount of
+                                                                                                        income-tax
+                                                                                                        calculated on
+                                                                                                        such long-term
+                                                                                                        capital gains
+                                                                                                        exceeding one
+                                                                                                        lakh rupees at
+                                                                                                        the rate of ten
+                                                                                                        per cent; and
+                                                                                                </p>
+
+                                                                                                <P>(ii) the amount of
+                                                                                                        income-tax
+                                                                                                        payable on the
+                                                                                                        total income as
+                                                                                                        reduced by the
+                                                                                                        amount of
+                                                                                                        long-term
+                                                                                                        capital gains
+                                                                                                        referred to in
+                                                                                                        sub-section (1)
+                                                                                                        as if the total
+                                                                                                        income so
+                                                                                                        reduced were the
+                                                                                                        total income of
+                                                                                                        the assessee:
+                                                                                                </p>
+
+                                                                                                <P>Provided that in the
+                                                                                                        case of an
+                                                                                                        individual or a
+                                                                                                        Hindu undivided
+                                                                                                        family, being a
+                                                                                                        resident, where
+                                                                                                        the total income
+                                                                                                        as reduced by
+                                                                                                        such long-term
+                                                                                                        capital gains is
+                                                                                                        below the
+                                                                                                        maximum amount
+                                                                                                        which is not
+                                                                                                        chargeable to
+                                                                                                        income-tax,
+                                                                                                        then, the
+                                                                                                        long-term
+                                                                                                        capital gains,
+                                                                                                        for the purposes
+                                                                                                        of clause (i),
+                                                                                                        shall be reduced
+                                                                                                        by the
+                                                                                                        amount by which
+                                                                                                        the total income
+                                                                                                        as so reduced
+                                                                                                        falls short of
+                                                                                                        the maximum
+                                                                                                        amount
+                                                                                                        which is not
+                                                                                                        chargeable to
+                                                                                                        income-tax.</p>
+
+                                                                                                <P>(3) The condition
+                                                                                                        specified in
+                                                                                                        clause (iii) of
+                                                                                                        sub-section (1)
+                                                                                                        shall not apply
+                                                                                                        to a
+                                                                                                        transfer
+                                                                                                        undertaken on a
+                                                                                                        recognised stock
+                                                                                                        exchange located
+                                                                                                        in any
+                                                                                                        International
+                                                                                                        Financial
+                                                                                                        Services Centre
+                                                                                                        and where the
+                                                                                                        consideration
+                                                                                                        for such
+                                                                                                        transfer is
+                                                                                                        received or
+                                                                                                        receivable in
+                                                                                                        foreign
+                                                                                                        currency.</P>
+
+                                                                                                <P>(4) The Central
+                                                                                                        Government may,
+                                                                                                        by notification
+                                                                                                        in the Official
+                                                                                                        Gazette, specify
+                                                                                                        the
+                                                                                                        nature of
+                                                                                                        acquisition in
+                                                                                                        respect of which
+                                                                                                        the provisions
+                                                                                                        of sub-clause
+                                                                                                        (a) of
+                                                                                                        clause (iii) of
+                                                                                                        sub-section (1)
+                                                                                                        shall not apply.
+                                                                                                </P>
+
+                                                                                                <P>(5) Where the gross
+                                                                                                        total income of
+                                                                                                        an assessee
+                                                                                                        includes any
+                                                                                                        long-term
+                                                                                                        capital gains
+                                                                                                        referred to in
+                                                                                                        sub-section (1),
+                                                                                                        the deduction
+                                                                                                        under Chapter
+                                                                                                        VI-A shall be
+                                                                                                        allowed from the
+                                                                                                        gross total
+                                                                                                        income as
+                                                                                                        reduced by such
+                                                                                                        capital gains.
+                                                                                                </P>
+
+                                                                                                <P>(6) Where the total
+                                                                                                        income of an
+                                                                                                        assessee
+                                                                                                        includes any
+                                                                                                        long-term
+                                                                                                        capital gains
+                                                                                                        referred to in
+                                                                                                        sub-section (1),
+                                                                                                        the rebate under
+                                                                                                        section 87A
+                                                                                                        shall be allowed
+                                                                                                        from the
+                                                                                                        income-tax on
+                                                                                                        the total income
+                                                                                                        as reduced by
+                                                                                                        tax payable on
+                                                                                                        such
+                                                                                                        capital gains.
+                                                                                                </P>
+
+                                                                                                <P>Explanation.—For the
+                                                                                                        purposes of this
+                                                                                                        section,—</P>
+
+                                                                                                <P>(a) "equity oriented
+                                                                                                        fund" means a
+                                                                                                        fund set up
+                                                                                                        under a scheme
+                                                                                                        of a mutual fund
+                                                                                                        specified under
+                                                                                                        clause (23D) of
+                                                                                                        section 10 and,—
+                                                                                                </P>
+
+                                                                                                <P>(i) in a case where
+                                                                                                        the fund invests
+                                                                                                        in the units of
+                                                                                                        another fund
+                                                                                                        which is traded
+                                                                                                        on
+                                                                                                        a recognised
+                                                                                                        stock exchange,—
+                                                                                                </P>
+
+                                                                                                <P>(A) a minimum of
+                                                                                                        ninety per cent
+                                                                                                        of the total
+                                                                                                        proceeds of such
+                                                                                                        fund is invested
+                                                                                                        in
+                                                                                                        the units of
+                                                                                                        such other fund;
+                                                                                                        and</P>
+
+                                                                                                <P>(B) such other fund
+                                                                                                        also invests a
+                                                                                                        minimum of
+                                                                                                        ninety per cent
+                                                                                                        of its total
+                                                                                                        proceeds
+                                                                                                        in the equity
+                                                                                                        shares of
+                                                                                                        domestic
+                                                                                                        companies listed
+                                                                                                        on a recognised
+                                                                                                        stock
+                                                                                                        exchange; and
+                                                                                                </P>
+
+                                                                                                <P>(ii) in any other
+                                                                                                        case, a minimum
+                                                                                                        of sixty-five
+                                                                                                        per cent of the
+                                                                                                        total proceeds
+                                                                                                        of
+                                                                                                        such fund is
+                                                                                                        invested in the
+                                                                                                        equity shares of
+                                                                                                        domestic
+                                                                                                        companies listed
+                                                                                                        on a
+                                                                                                        recognised stock
+                                                                                                        exchange:</P>
+
+                                                                                                <P>Provided that the
+                                                                                                        percentage of
+                                                                                                        equity
+                                                                                                        shareholding or
+                                                                                                        unit held in
+                                                                                                        respect of the
+                                                                                                        fund, as the
+                                                                                                        case may be,
+                                                                                                        shall be
+                                                                                                        computed with
+                                                                                                        reference to the
+                                                                                                        annual average
+                                                                                                        of the monthly
+                                                                                                        averages of the
+                                                                                                        opening and
+                                                                                                        closing figures;
+                                                                                                </P>
+
+                                                                                                <P>(b) "International
+                                                                                                        Financial
+                                                                                                        Services Centre"
+                                                                                                        shall have the
+                                                                                                        meaning assigned
+                                                                                                        to it
+                                                                                                        in clause (q) of
+                                                                                                        section 2 of the
+                                                                                                        Special Economic
+                                                                                                        Zones Act, 2005
+                                                                                                        (28 of 2005);
+                                                                                                </P>
+
+                                                                                                <P>(c) "recognised stock
+                                                                                                        exchange" shall
+                                                                                                        have the meaning
+                                                                                                        assigned to it
+                                                                                                        in clause (ii)
+                                                                                                        of Explanation 1
+                                                                                                        to clause (5) of
+                                                                                                        section 43.]</P>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                                <tr>
+                                                                        <td scope="col">From 01/04/2020 to 15/06/2020
+                                                                        </td>
+                                                                        <td scope="col">From 16/06/2020 to 15/09/2020
+                                                                        </td>
+                                                                        <td scope="col">From 16/09/2020 to 15/12/2020
+                                                                        </td>
+                                                                        <td scope="col">From 16/12/2020 to 15/03/2021
+                                                                        </td>
+                                                                        <td scope="col">From 16/03/2021 to<br>
+                                                                                31/03/2021 </td>
+                                                                        <td scope="col">Total</td>
+
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                <tr>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="ltcgcusone"
+                                                                                        onchange="ltcgcus()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="ltcgcustwo"
+                                                                                        onchange="ltcgcus()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="ltcgcusthree"
+                                                                                        onchange="ltcgcus()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="ltcgcusfour"
+                                                                                        onchange="ltcgcus()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        id="ltcgcusfive"
+                                                                                        onchange="ltcgcus()" />
+                                                                        </td>
+                                                                        <td scope="row"><input type="text"
+                                                                                        class="sample" size="7"
+                                                                                        value="0" maxlength="10"
+                                                                                        disabled id="ltcgcustotal"
+                                                                                        onchange="ltcgcus()" /></td>
+
+                                                                </tr>
+                                                        </tbody>
+
+                                                </table>
+                                        </div>
+                                </div>
+                        </div>
+
+                        <div class="form-group">
+                                <label class="control-label col-sm-5" for="ifos">Income From Other Sources</label>
+                                <div class="col-xs-4">
+                                        <input type="text" class="form-control" id="totalforios" size="50%" value="0"
+                                                disabled onclick="calcTaxes()">
+                                </div>
+                                <button class="accordion" type="button" onclick="myFunction('myDIV3')" id="myDIV3">Show
+                                        Details</button>
+                                <div class="panel">
+                                        <p>Interest<input type="text" size="15" id="interestfos" value="0"
+                                                        onchange="otherincomes()" /></p>
+                                        <p>Commission/Other Income<input type="text" size="15" id="coifos" value="0"
+                                                        onchange="otherincomes()" /></p>
+                                        <p>Winnings from Lottery, Crossword Puzzles, etc.<input type="text" size="15"
+                                                        id="wlcpeos" value="0" onchange="otherincomes()" /></p>
+
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5" for="pgb">Profits and Gains of Business or
+                                        Profession (enter profit only)</label>
+                                <div class="col-xs-4">
+                                        <input type="text" class="form-control" id="pgbpcos" value="0" size="50%"
+                                                onclick="calcTaxes()">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5" for="ai">Agricultural Income</label>
+                                <div class="col-xs-4">
+                                        <input type="text" class="form-control" value="0" id="aios" size="50%">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5" for="ds">Deductions</label>
+                                <div class="col-xs-4">
+                                        <input type="text" class="form-control" value="0" id="fordeductions" size="50%"
+                                                onclick="calcTaxes()">
+                                </div>
+                                <button class="accordion" type="button" onclick="myFunction('myDIV4')" id="myDIV4">Show
+                                        Details</button>
+
+                                <div class="panel"><br><br>
+                                        <p>Basic Deductions - 80C<a href="#" data-toggle="tooltip"
+                                                        data-placement="right"
+                                                        title="Amount invested/paid in tax saving instruments such as PPF, ELSS mutual funds, LIC premium, etc."><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                height="15" fill="currentColor"
+                                                                class="bi bi-info-circle" viewBox="0 0 16 16">
+                                                                <path
+                                                                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                                <path
+                                                                        d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                                        </svg></a><input type="text" size="15" id="basicded" value="0"
+                                                        onchange="finaldeductions()" /></p>
+                                        <p>Medical Insurance - 80D<a href="#" data-toggle="tooltip"
+                                                        data-placement="right"
+                                                        title="Medical premium & preventive health checkup fees paid for self & family including parents"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                height="15" fill="currentColor"
+                                                                class="bi bi-info-circle" viewBox="0 0 16 16">
+                                                                <path
+                                                                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                                <path
+                                                                        d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                                        </svg></a><input type="text" size="15" id="Medicalded" value="0"
+                                                        onchange="finaldeductions()" /></p>
+                                        <p>Interest on Educational Loan - 80E<a href="#" data-toggle="tooltip"
+                                                        data-placement="right"
+                                                        title="Amount of interest paid on loan taken for higher education"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                height="15" fill="currentColor"
+                                                                class="bi bi-info-circle" viewBox="0 0 16 16">
+                                                                <path
+                                                                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                                <path
+                                                                        d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                                        </svg></a><input type="text" size="15" id="intrestded" value="0"
+                                                        onchange="finaldeductions()" /></p>
+                                        <p>Employee's contribution to NPS - 80CCD<a href="#" data-toggle="tooltip"
+                                                        data-placement="right"
+                                                        title="Includes voluntary contribution to National Pension Scheme (NPS) under section 80CCD(1) and 80CCD(1B)"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                height="15" fill="currentColor"
+                                                                class="bi bi-info-circle" viewBox="0 0 16 16">
+                                                                <path
+                                                                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                                <path
+                                                                        d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                                        </svg></a><input type="text" size="15" id="employeeded"
+                                                        value="0" onchange="finaldeductions()" /></p>
+                                        <p>Interest from Deposits - 80TTA<a href="#" data-toggle="tooltip"
+                                                        data-placement="right"
+                                                        title="Amount of interest income on deposits in savings account (includes fixed/recurring deposit interest in case of senior citizen)"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                height="15" fill="currentColor"
+                                                                class="bi bi-info-circle" viewBox="0 0 16 16">
+                                                                <path
+                                                                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                                <path
+                                                                        d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                                        </svg></a><input type="text" size="15" id="intrestdepded"
+                                                        value="0" onchange="finaldeductions()" /></p>
+                                        <p>Donations to Charity - 80G<a href="#" data-toggle="tooltip"
+                                                        data-placement="right"
+                                                        title="Amount paid as donation to charitable insitutions or certain recognized funds"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                height="15" fill="currentColor"
+                                                                class="bi bi-info-circle" viewBox="0 0 16 16">
+                                                                <path
+                                                                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                                <path
+                                                                        d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                                        </svg></a><input type="text" size="15" id="donationsded"
+                                                        value="0" onchange="finaldeductions()" /></p>
+                                        <p>Interest on Housing Loan - 80EEA<a href="#" data-toggle="tooltip"
+                                                        data-placement="right"
+                                                        title="Amount of interest paid on housing loan sanctioned during FY 19-20"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                height="15" fill="currentColor"
+                                                                class="bi bi-info-circle" viewBox="0 0 16 16">
+                                                                <path
+                                                                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                                <path
+                                                                        d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                                        </svg></a><input type="text" size="15" id="intresthousingded"
+                                                        value="0" onchange="finaldeductions()" /></p>
+
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5" for="ti">Net Taxable Income</label>
+                                <div class="col-xs-4">
+                                        <input type="text" class="form-control" id="ntifinal" size="50%" disabled>
+                                </div>
+
+                        </div>
+                        <br>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5" for="iltn">Income Liable to Tax at Normal
+                                        Rate---</label>
+                                <div class="row">
+                                        <div class="form-group col-xs-2">
+                                                <label for="firstname" class="sr-only"></label>
+                                                <input id="iltnrtotal" class="form-control input-group-lg reg_name"
+                                                        type="text" disabled />
+                                        </div>
+
+                                        <div class="form-group col-xs-2">
+                                                <label for="lastname" class="sr-only"></label>
+                                                <input id="iltnrtax" class="form-control input-group-lg reg_name"
+                                                        type="text" disabled />
+                                        </div>
+
+                                </div>
+
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5" for="stcg">Short Term Capital Gains
+                                        (Covered u/s
+                                        111A) 15%</label>
+                                <div class="row">
+                                        <div class="form-group col-xs-2">
+                                                <label for="firstname" class="sr-only"></label>
+                                                <input id="stcgin" class="form-control input-group-lg reg_name"
+                                                        type="text" disabled />
+                                        </div>
+
+                                        <div class="form-group col-xs-2">
+                                                <label for="lastname" class="sr-only"></label>
+                                                <input id="stcgop" class="form-control input-group-lg reg_name"
+                                                        type="text" disabled />
+                                        </div>
+                                </div>
+
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5" for="ltcg">Long Term Capital Gains (Covered u/s
+                                        112A) 10%</label>
+                                <div class="row">
+                                        <div class="form-group col-xs-2">
+                                                <label for="firstname" class="sr-only"></label>
+                                                <input id="ltcgcusin" class="form-control input-group-lg reg_name"
+                                                        type="text" disabled />
+                                        </div>
+
+                                        <div class="form-group col-xs-2">
+                                                <label for="lastname" class="sr-only"></label>
+                                                <input id="ltcgcusop" class="form-control input-group-lg reg_name"
+                                                        type="text" disabled />
+                                        </div>
+                                </div>
+
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5" for="ltcg">Long Term Capital Gains
+                                        (Charged to tax
+                                        @ 20%) 20%</label>
+                                <div class="row">
+                                        <div class="form-group col-xs-2">
+                                                <label for="firstname" class="sr-only"></label>
+                                                <input id="ltcgctin" class="form-control input-group-lg reg_name"
+                                                        type="text" disabled />
+                                        </div>
+
+                                        <div class="form-group col-xs-2">
+                                                <label for="lastname" class="sr-only"></label>
+                                                <input id="ltcgctop" class="form-control input-group-lg reg_name"
+                                                        type="text" disabled />
+                                        </div>
+                                </div>
+
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5" for="ltcg">Long Term Capital Gains
+                                        (Charged to tax
+                                        @ 10%) 10%</label>
+                                <div class="row">
+                                        <div class="form-group col-xs-2">
+                                                <label for="firstname" class="sr-only"></label>
+                                                <input id="ltcgcttin" class="form-control input-group-lg reg_name"
+                                                        type="text" disabled />
+                                        </div>
+
+                                        <div class="form-group col-xs-2">
+                                                <label for="lastname" class="sr-only"></label>
+                                                <input id="ltcgcttop" class="form-control input-group-lg reg_name"
+                                                        type="text" disabled />
+                                        </div>
+                                </div>
+
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5" for="wlcp">Winnings from Lottery, Crossword
+                                        Puzzles, etc) 30%</label>
+                                <div class="row">
+                                        <div class="form-group col-xs-2">
+                                                <label for="firstname" class="sr-only"></label>
+                                                <input id="ltryin" class="form-control input-group-lg reg_name"
+                                                        type="text" disabled />
+                                        </div>
+
+                                        <div class="form-group col-xs-2">
+                                                <label for="lastname" class="sr-only"></label>
+                                                <input id="ltryop" class="form-control input-group-lg reg_name"
+                                                        type="text" disabled />
+                                        </div>
+                                </div>
+
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5" for="it">Income Tax</label>
+                                <div class="col-xs-4">
+                                        <input type="text" class="form-control" id="itaxop" size="50%" disabled
+                                                onclick="calcTaxes()">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5" for="s">Surcharge</label>
+                                <div class="col-xs-4">
+                                        <input type="text" class="form-control" id="scharge" size="50%" disabled>
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label col-sm-5" for="ec">Health & Education Cess</label>
+                                <div class="col-xs-4">
+                                        <input type="text" class="form-control" id="ecess" size="50%" disabled>
+                                </div>
+                        </div>
+
+                        <div class="form-group">
+                                <label class="control-label col-sm-5" for="ttl">Total Tax Liability</label>
+                                <div class="col-xs-4">
+                                        <input type="text" class="form-control" id="sum" size="50%" disabled
+                                                onclick="calcTaxes()">
+                                </div>
+                                
+        
+                        </div>
+                        <div class="text-center">
+                        <button class="btn btn-primary " type="button" onclick="calcTaxes()">Calculate</button>
+                                <button class="btn btn-danger" type="reset">Reset</button>
+                        </div>
+                </form>
+
+        </div>
+        <div>
+        </div>
+
+</body>
+<script src="script.js"></script>
+
+</html>

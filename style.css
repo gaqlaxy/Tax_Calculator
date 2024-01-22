@@ -1,0 +1,103 @@
+.button {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 11px;
+    margin: 3px 3px;
+    cursor: pointer;
+
+}
+
+.button5 {
+    border-radius: 50%;
+}
+
+.accordion, .btnaccordion {
+    background-color: #eee;
+    color: black;
+    cursor: pointer;
+    padding: 10px;
+    /* width: 8%; */
+    width: 10%;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 11px;
+    margin: 3px 3px;
+    transition: 0.4s;
+    border-radius: 40%;
+}
+
+.active,
+.accordion:hover {
+    background-color: #ccc;
+}
+
+.panel {
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+
+}
+
+input {
+    float: right;
+    height:20px;
+    font-size: smaller;
+
+
+}
+
+.container {
+    float: center;
+}
+
+.sample {
+    float: left;
+}
+
+.box {
+    /* padding: 12px; */
+    /* width: 250px; */
+    transform: translate(1%, 25%);
+}
+
+.button1,
+.button2 {
+    border: none;
+    color: white;
+    padding: 5px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: Grey;
+}
+
+.button2 {
+    background-color: Grey;
+}
+.pointer {cursor: pointer;}
+
+/* .modal {
+    width: 900px;
+    margin:auto;
+} */
+.tooltip .arrow:before {
+    border-top-color: #008ec3 !important;
+}
+
+.tooltip .tooltip-inner {
+    background-color:rgb(65, 64, 64);
+}
+
+
